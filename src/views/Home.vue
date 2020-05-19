@@ -4,7 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <HeaderShayna />
     <HeroShayna />
-    <SliderShayna />
+    <WomanShayna />
     <InstaShayna />
     <PatnerShayna />
     <FooterShayna />
@@ -16,7 +16,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 import HeaderShayna from "@/components/HeaderShayna.vue"
 import HeroShayna from "@/components/HeroShayna.vue"
-import SliderShayna from "@/components/SliderShayna.vue"
+import WomanShayna from "@/components/WomanShayna.vue"
 import InstaShayna from "@/components/InstaShayna.vue"
 import PatnerShayna from "@/components/PatnerShayna.vue"
 import FooterShayna from "@/components/FooterShayna.vue"
@@ -26,7 +26,7 @@ export default {
   components: {
     HeaderShayna,
     HeroShayna,
-    SliderShayna,
+    WomanShayna,
     InstaShayna,
     PatnerShayna,
     FooterShayna

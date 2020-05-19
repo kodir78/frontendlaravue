@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-item">
+                        <!-- <div class="product-item">
                             <div class="pi-pic">
                                 <img src="img/products/women-2.jpg" alt="" />
                                 <ul>
@@ -90,7 +90,7 @@
                                     $34.00
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </carousel>
                 </div>
             </div>
