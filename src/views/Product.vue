@@ -9,7 +9,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
-                        <router-link :to="'/'"><i class="fa fa-home"></i> Home</router-link>
+                        <router-link :to="'/'">
+                            <i class="fa fa-home"></i> Home
+                        </router-link>
                         <span>Detail</span>
                     </div>
                 </div>
@@ -35,7 +37,8 @@
                                     <div 
                                     v-for="ss in productDetails.galleries"
                                     :key="ss.id"
-                                    class="pt" @click="changeImage(ss.photo)" 
+                                    class="pt" 
+                                    @click="changeImage(ss.photo)" 
                                     :class="ss.photo == image_default ? 'active' : ''">
                                         <img :src="ss.photo" alt="" />
                                     </div>
@@ -53,7 +56,9 @@
                                     <h4>${{ productDetails.price }}</h4>
                                 </div>
                                 <div class="quantity">
-                                    <router-link :to="'/cart'" class="primary-btn pd-cart">Add To Cart</router-link>
+                                    <router-link to="/cart">
+                                        <a @click="saveKeranjang(productDetails.id, productDetails.name, productDetails.price, productDetails.galleries[0].photo)" href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +97,8 @@ export default {
       return {
         image_default: '',
        // id: this.$route.params.id
-       productDetails:[]
+       productDetails:[],
+       keranjangUser: []
       }
   },
   methods: {
@@ -106,22 +112,42 @@ export default {
         this.productDetails = data;
         // replace value gambar default dengan data dari API (galleries)
          this.image_default = data.galleries[0].photo;
+      },
+      saveKeranjang(idProduct, nameProduct, priceProduct, photoProduct) {
+
+      var productStored = {
+        "id": idProduct,
+        "name": nameProduct,
+        "price": priceProduct,
+        "photo": photoProduct
       }
+
+      this.keranjangUser.push(productStored);
+      const parsed = JSON.stringify(this.keranjangUser);
+      localStorage.setItem('keranjangUser', parsed);
+      window.location.reload();
+    }
   },
   mounted() {
+      if (localStorage.getItem('keranjangUser')) {
+      try {
+        this.keranjangUser = JSON.parse(localStorage.getItem('keranjangUser'));
+      } catch(e) {
+        localStorage.removeItem('keranjangUser');
+      }
+    }
       axios
       .get("http://toko-online.test/api/products", {
           params: {
-                id: this.$route.params.id
+            id: this.$route.params.id
           }
       })
       .then(res => this.setDataPicture(res.data.data))
-      .then(res => (this.productDetails = res.data.data))
+      //.then(res => (this.productDetails = res.data.data))
       // eslint-disable-next-line no-console
       .catch(err => console.log(err));
-
   }
-}
+};
 </script>
 
 <style scoped>

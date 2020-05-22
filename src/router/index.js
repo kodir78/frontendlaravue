@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Product from '../views/Product.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
-import Sukses from '../views/Sukses.vue'
+import Success from '../views/Success.vue'
 
 Vue.use(VueRouter)
 
@@ -33,9 +33,9 @@ Vue.use(VueRouter)
     component: ShoppingCart
   },
   {
-    path: '/sukses',
-    name: 'Sukses',
-    component: Sukses
+    path: '/success',
+    name: 'success',
+    component: Success
   },
 ]
 

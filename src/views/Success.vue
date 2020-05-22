@@ -1,5 +1,5 @@
 <template>
-  <div class="sukses">
+  <div class="success">
       
     <div class="d-flex success-checkout align-items-center justify-content-center">
         <div class="col col-lg-4 text-center">
@@ -19,7 +19,7 @@
 <script>
 
 export default {
-  name: "sukses",
+  name: "success",
   components: {
   }
 };

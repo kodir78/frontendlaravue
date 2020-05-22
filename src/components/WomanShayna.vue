@@ -10,8 +10,10 @@
                                 <img v-bind:src="itemProduct.galleries[0].photo" alt="" />
                                 <!-- <img src="img/mickey1.jpg" alt="" /> -->
                                 <ul>
-                                    <li class="w-icon active">
-                                        <a href="#"><i class="icon_bag_alt"></i></a>
+                                    <li @click="saveKeranjang(itemProduct.id, itemProduct.name, itemProduct.price, itemProduct.galleries[0].photo)" class="w-icon active">
+                                        <a href="#">
+                                            <i class="icon_bag_alt"></i>
+                                        </a>
                                     </li>
                                     <li class="quick-view">
                                         <router-link v-bind:to="'/product/'+itemProduct.id">+ Quick View</router-link>
@@ -51,22 +53,48 @@ export default {
   },
   data() {
       return {
-          products: []
+          products: [],
+          keranjangUser: []
       };
   },
+  methods: {
+    saveKeranjang(idProduct, nameProduct, priceProduct, photoProduct) {
+      var productStored = {
+        id: idProduct,
+        name: nameProduct,
+        price: priceProduct,
+        photo: photoProduct
+      };
+
+      this.keranjangUser.push(productStored);
+      const parsed = JSON.stringify(this.keranjangUser);
+      localStorage.setItem("keranjangUser", parsed);
+
+      window.location.reload();
+    }
+  },
   mounted() {
+      if (localStorage.getItem('keranjangUser')) {
+      try {
+        this.keranjangUser = JSON.parse(localStorage.getItem('keranjangUser'));
+      } catch(e) {
+        localStorage.removeItem('keranjangUser');
+      }
+    }
       axios
       .get("http://toko-online.test/api/products")
       .then(response => (this.products = response.data.data.data))
       // eslint-disable-next-line no-console
       .catch(err => console.log(err));
-
   }
-}
+};
 </script>
 
 <style scoped>
 .product-item{
     margin-right: 25px;
+}
+.pi-pic img {
+  height: 450px;
 }
 </style>
